@@ -1,0 +1,28 @@
+<div style="width:80%; margin-left:10%; min-width:400px; margin-top:15px;">
+	<div style="width: 100%; text-align:center;">
+		<img src="" style="width:220px; height:220px; background-color:white; box-shadow: 5px 5px 10px black;">
+	</div>
+
+	<h1 style="padding:2% 5%; font-size:36pt">{{user.username}}</h1>
+
+	<hr style="width:100%; border-color:#65E248; opacity:0.5;">
+	<div style="height:100px; width:100%; overflow:auto; position:relative;">
+		<a href ng-click="emptyComments()" style="position:absolute; top:0; right:10px; color:red;" ng-show="isLoggedIn">Empty</a>
+		<ul style="list-style:none;">
+			<li ng-repeat="comment in user.comments" style="font-size:15pt;"><span style="color:white;">by</span> {{comment.author}} - <span style="color:white;">{{comment.body}}</span></li>
+		</ul>
+	</div>
+	<hr style="width:100%; border-color:#65E248; opacity:0.5;">
+
+	<form ng-submit="addComment()" ng-show="isLoggedIn">
+		<div class="form-group">
+			<input style="text" placeholder="comment" class="form-control" ng-model="body"></input>
+		</div>
+	</form>
+	<p style="float:left;">
+		<span class="glyphicon glyphicon-star-empty" style="font-size:20pt; margin-top:30px; cursor:pointer;" ng-click="upvote(user)" ng-show="!user.hasVoted"></span>
+		<span class="glyphicon glyphicon-star" style="font-size:20pt; margin-top:25px;" ng-click="upvote(user)" ng-show="user.hasVoted"></span> 
+		<span style="color:white;">{{user.upvotes}}</span>
+	</p>
+	<p style="float:right; margin-top:20px;"><a href="/#/">Back</a></p>
+</div>

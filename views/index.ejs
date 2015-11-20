@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Userpage</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+
+    <script src="/javascripts/angularApp.js"></script>
+
+    <style type="text/css">
+      body {
+      	background-color: #3E3E3E;
+      	color:#65E248;
+      	font-family: 'Roboto', sans-serif, 100;
+      }
+      a {
+      	color:#65E248;
+      }
+      a:hover {
+      	text-decoration: none;
+      	color:#65E248;
+      }
+
+      p {
+      	font-size:20pt;
+      }
+      * {
+        border-radius: 0 !important;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      #leftBox {
+        width:50%; height:100vh; float:left; min-width:400px;
+      }
+
+      #rightBox {
+        width: 50%; height:100vh; float: left; min-width: 400px; position: relative;
+      }
+
+      @media only screen and (max-width: 800px) {
+          #leftBox {
+            width: 100%;
+          }
+
+          #rightBox {
+            width: 100%;
+          }
+      }
+
+    </style>
+
+  </head>
+  <body ng-app="app" ng-controller="MainCtrl">
+
+
+
+
+
+
+
+    <!-- Hud -->
+
+    <!-- Log out -->
+    <a href ng-click="logOut()" style="position:absolute; top:10px; right:20px; font-size:15pt; color:white; z-index:5;" ng-show="isLoggedIn">Log Out</a>
+
+    <!-- Author -->
+    <p style="position:absolute; bottom:0; right:10px; font-size:10pt;"><span style="color:white;">Created by:</span> Anton Bergenudd</p>
+    
+
+
+
+
+
+      <!-- Left side -->
+  		<div id="leftBox">
+  			<ui-view></ui-view>
+  		</div>
+
+
+
+
+
+      <!-- Right side -->
+
+      <!-- Wrapper -->
+  		<div ng-controller="LoginCtrl" id="rightBox">
+
+        <!-- Jumbotron -->
+  			<div style="width:80%; margin-left:10%; margin-top:275px; font-size:40pt; text-align:center; min-width:400px;">
+
+          <!-- Auth Jumbotron -->
+          <div style="display:inline-block;" ng-show="!isLoggedIn">
+              <a href ng-click="toggle('login')" style="color:white; float:left;">Log in</a>
+              <div style="width:1px; height:100px; background-color:#65E248; float:left; margin:-10px 30px 0;"></div>
+              <a href ng-click="toggle('register')" style="color:white; float:left;">Register</a>
+          </div>
+
+          <!-- Logged in Jumbotron -->
+          <div style="display:inline-block;" ng-show="isLoggedIn">
+            <p><span style="color:white;">Welcome</span> {{currentUser.username}}</p>
+          </div>
+
+        </div>
+
+        <!-- Auth wrapper -->
+  			<div style="width:80%; height:500px; background-color:white; position:absolute; bottom:0; right:0; box-shadow: -5px -2px 10px black;" ng-show="show">
+
+          <!-- Header -->
+  				<h1 ng-show="!error">{{state | uppercase}}</h1>
+          <h1 ng-show="error" style="color:red;">{{error}}</h1>
+
+          <!-- Body -->
+  				<div style="width:80%; margin-left:10%; margin-top:30px;">
+  					
+  					<!-- Login -->
+  					<form ng-submit="login()" ng-show="state == 'login'" style="margin-top:100px;">
+  						<div class="form-group">
+  							<input type="text" placeholder="username" ng-model="user.username" class="form-control"></input>
+  						</div>
+  						<div class="form-group" style="margin-top:20px;">
+  							<input type="password" placeholder="password" ng-model="user.password" class="form-control"></input>
+  						</div>
+  						<div style="margin-top:50px;">
+  							<button type="submit" class="btn btn-primary" style="float:left;">Send</button>
+  							<a ng-click="toggle()" class="btn btn-primary" style="float:left; margin-left:30px;">Back</a>
+  						</div>
+  					</form>
+
+  					<!-- Register -->
+  					<form ng-submit="register()" ng-show="state == 'register'">
+  						<div class="form-group">
+  							<input type="text" placeholder="username" ng-model="user.username" class="form-control"></input>
+  						</div>
+  						<div class="form-group">
+  							<input type="password" placeholder="password" ng-model="user.password" class="form-control"></input>
+  						</div>
+
+  						<div class="form-group">
+  							<img src="" style="width:200px; height:200px; margin-top:20px;">
+  						</div>
+  						<div style="margin-top:30px;">
+  							<button type="submit" class="btn btn-primary" style="float:left;">Send</button>
+  							<a ng-click="toggle()" class="btn btn-primary" style="float:left; margin-left:15px;">Back</a>
+  						</div>
+  					</form>
+
+  				</div> 
+  			</div> <!-- /. Auth wrapper -->
+
+  		</div><!--  /. Wrapper -->
+
+
+
+
+
+  </body>
+</html>

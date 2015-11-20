@@ -1,0 +1,16 @@
+
+<!-- User list wrapper -->
+<div style="width:80%; margin-left:10%; margin-top:200px; min-width:300px;">
+
+	<!-- Title -->
+	<h1 class="page-header" style="color:white; font-size:40pt;">Users</h1>
+
+	<!-- Body -->
+	<ul style="font-size:20pt;">
+		<li ng-repeat="user in users | orderBy: '-upvotes'">
+			<p ng-hide="user.username == currentUser.username">
+				<a href="#/user/{{user._id}}">{{user.username}}</a> <span style="color:white;"> - </span>{{user.regDate}}
+			</p>
+		</li>
+	</ul>
+</div>
